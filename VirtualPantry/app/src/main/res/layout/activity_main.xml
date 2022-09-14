@@ -7,66 +7,12 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvAppName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="Twoja spiżarnia"
-        android:fontFamily="@font/kyivtypeserif"
-        android:textSize="30sp"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/btnAddItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="3dp"
-            android:text="Dodaj"
-            android:fontFamily="@font/kyivtypeserif" />
-
-        <Button
-            android:id="@+id/btnDelItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="3dp"
-            android:text="Usuń"
-            android:fontFamily="@font/kyivtypeserif" />
-
-        <Button
-            android:id="@+id/btnEditItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="3dp"
-            android:text="Edytuj"
-            android:fontFamily="@font/kyivtypeserif" />
-
-        <Button
-            android:id="@+id/btnSortItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="3dp"
-            android:text="Sortuj"
-            android:fontFamily="@font/kyivtypeserif" />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
