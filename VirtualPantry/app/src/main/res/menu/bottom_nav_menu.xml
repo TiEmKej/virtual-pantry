@@ -7,7 +7,7 @@
         />
     <item
         android:id="@+id/addMenu"
-        android:title="Dodaj"
+        android:title="Dodaj artykuł"
         android:icon="@drawable/add_48px"
         />
     <item

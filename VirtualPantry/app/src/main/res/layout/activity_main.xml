@@ -18,12 +18,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+    <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bnvMenuBar"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bnvMenuBar">
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnvMenuBar"
