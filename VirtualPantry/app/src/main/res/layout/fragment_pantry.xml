@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".FragmentPantry">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPantryFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="PantryFragment"
-        android:textSize="20sp"/>
+        tools:listitem="@layout/cv_pantry_fragment_item" />
 
 </FrameLayout>
