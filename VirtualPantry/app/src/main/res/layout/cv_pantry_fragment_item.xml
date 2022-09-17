@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_margin="5dp"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="25dp"
+    app:cardBackgroundColor="@color/appPrimaryVariant">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPFIItemPreview"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" 
+            android:src="@drawable/lemon"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPFITextContainer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivPFIItemPreview"
+            app:layout_constraintEnd_toStartOf="@id/clPFIDateContainer"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPantryItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintTop_toTopOf="@id/clPFITextContainer"
+                app:layout_constraintStart_toStartOf="@id/clPFITextContainer"
+                app:layout_constraintEnd_toEndOf="@id/clPFITextContainer"
+                android:text="Lorem ipsum"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/tvPantryItemQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/clPFITextContainer"
+                app:layout_constraintStart_toStartOf="@id/clPFITextContainer"
+                app:layout_constraintEnd_toEndOf="@id/clPFITextContainer"
+                android:text="Lorem ipsum"
+                android:textSize="17sp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clPFIDateContainer"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/neutral"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="X Dni"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
