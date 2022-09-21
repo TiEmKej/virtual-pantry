@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/tvPantryItemName"
+                android:id="@+id/tvPFIPantryItemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -46,7 +46,7 @@
                 android:textSize="17sp"/>
 
             <TextView
-                android:id="@+id/tvPantryItemQuantity"
+                android:id="@+id/tvPFIPantryItemQuantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -69,6 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
+                android:id="@+id/ivPFIPantryItemDayImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/neutral"
@@ -77,6 +78,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvPFIPantryItemDayText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
