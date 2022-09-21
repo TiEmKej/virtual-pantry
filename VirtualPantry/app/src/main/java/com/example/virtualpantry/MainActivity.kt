@@ -3,6 +3,9 @@ package com.example.virtualpantry
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.virtualpantry.fragments.FragmentAdd
+import com.example.virtualpantry.fragments.FragmentEdit
+import com.example.virtualpantry.fragments.FragmentPantry
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(){
