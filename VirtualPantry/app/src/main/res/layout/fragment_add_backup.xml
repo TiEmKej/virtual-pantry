@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FragmentAdd"
+    >
+
+        <ImageView
+        android:id="@+id/take_photo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/product1"/>
+
+        <EditText
+            android:id="@+id/product_name"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:text=""
+            android:hint="Nazwa produktu"
+            android:layout_marginLeft="50dp"
+            app:layout_constraintLeft_toRightOf="@id/take_photo"
+            app:layout_constraintTop_toTopOf="@id/take_photo"
+            />
+
+    <TextView
+            android:id="@+id/fa_fourthy_text"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="Dni ważności"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@id/datePicker1"
+            app:layout_constraintTop_toBottomOf="@+id/take_photo"
+        />
+
+        <EditText
+            android:id="@+id/add_product_end_date"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/datePicker1"
+            app:layout_constraintTop_toBottomOf="@+id/fa_fourthy_text"
+             />
+
+        <TextView
+            android:id="@+id/fa_fifethy_text"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="Po otwarciu"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@id/datePicker1"
+            app:layout_constraintTop_toBottomOf="@+id/add_product_end_date"
+            />
+
+        <EditText
+            android:id="@+id/add_product_open_end_date"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintLeft_toRightOf="@+id/datePicker1"
+            app:layout_constraintTop_toBottomOf="@+id/fa_fifethy_text"
+            />
+
+        <DatePicker
+            android:id="@+id/datePicker1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/take_photo" />
+
+    <EditText
+        android:id="@+id/add_product_quanity"
+        android:layout_width="130dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="numberDecimal|numberSigned"
+        app:layout_constraintLeft_toLeftOf="@+id/datePicker1"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker1" />
+
+    <Spinner
+        android:id="@+id/unit_spinner"
+        android:layout_width="204dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+
+        app:layout_constraintLeft_toRightOf="@+id/add_product_quanity"
+        app:layout_constraintTop_toTopOf="@+id/add_product_quanity" />
+
+    <CheckBox
+           android:id="@+id/add_product_is_open"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="13dp"
+           android:text="Produkt otwarty"
+           app:layout_constraintTop_toBottomOf="@+id/add_product_quanity"
+           app:layout_constraintLeft_toLeftOf="@+id/datePicker1"
+            />
+    <CheckBox
+        android:id="@+id/add_product_is_outside_fridge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Produkt poza lodówką"
+        app:layout_constraintTop_toBottomOf="@+id/add_product_quanity"
+        app:layout_constraintLeft_toRightOf="@+id/add_product_is_open"
+        />
+
+        <ImageButton
+            android:id="@+id/add_product_add_button"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/add_48px"
+            app:layout_constraintTop_toBottomOf="@+id/add_product_is_outside_fridge"
+            app:layout_constraintLeft_toLeftOf="@+id/add_product_is_open"
+      />
+</androidx.constraintlayout.widget.ConstraintLayout>
