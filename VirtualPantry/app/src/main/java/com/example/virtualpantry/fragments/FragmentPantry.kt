@@ -1,102 +1,236 @@
 package com.example.virtualpantry.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+//import com.chaquo.python.PyObject
+//import com.chaquo.python.Python
+//import com.chaquo.python.android.AndroidPlatform
 import com.example.virtualpantry.R
 import com.example.virtualpantry.adapters.PantryAdapter
+import com.example.virtualpantry.adapters.ProductsAdapter
+import com.example.virtualpantry.database.SQLiteHelper
 import com.example.virtualpantry.dataclass.PantryItem
+import com.example.virtualpantry.dataclass.RemovedProductAnaliseData
+import java.util.*
+import java.util.zip.Inflater
 
-class FragmentPantry : Fragment(R.layout.fragment_pantry) {
-    var pantryItemList = ArrayList<PantryItem>()
+
+class FragmentPantry : Fragment(com.example.virtualpantry.R.layout.fragment_pantry) {
+    private lateinit var sqliteHelper: SQLiteHelper
+    private lateinit var recyclerView: RecyclerView
+    private var adapter: PantryAdapter? = null
+    private var std:PantryItem? = null
+    lateinit var v: View
+    val TAG: String = "FragmentPantry"
+    var dataAnalyseDialogsEnd: Int = 0
+    lateinit var data: RemovedProductAnaliseData
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        v = inflater.inflate(com.example.virtualpantry.R.layout.fragment_pantry, null)
+        recyclerView = v.findViewById<RecyclerView>(com.example.virtualpantry.R.id.rvPantryFragment)
+
+        adapter = PantryAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        getProducts()
+
+        adapter?.setOnClickDeleteItem {
+            deleteProduct(it.id)
+        }
+
+        adapter?.setOnClickPackageOpen {
+            ChangeProductToOpen(it)
+        }
+        return v
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataInitList()
+        sqliteHelper = SQLiteHelper(context)
+
+//        if (! Python.isStarted()) {
+//            Python.start( AndroidPlatform(requireContext()));
+//        }
+
+//        var py = Python.getInstance()
+//        var pySys:PyObject = py.getModule("sys")
+//        var pyIo:PyObject = py.getModule("io")
+//        var pyInterpreter:PyObject = py.getModule("interpreter")
+//        initPython()
+//        var hello_textview: String = getPythonHelloWorld()
+//        Log.i(TAG, "onCreate: $hello_textview")
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_pantry, container, false)
-        val recycleView = view.findViewById<RecyclerView>(R.id.rvPantryFragment)
-        recycleView.layoutManager = LinearLayoutManager(activity)
-        recycleView.adapter = PantryAdapter(pantryItemList)
+//    private fun initPython() {
+//        if (!Python.isStarted()) {
+//            Python.start(AndroidPlatform(requireContext()))
+//        }
+//    }
+//
+//    private fun getPythonHelloWorld(): String {
+//        val python = Python.getInstance()
+//        val pythonFile = python.getModule("pyfile")
+//        return pythonFile.callAttr("main").toString()
+//    }
 
-        return view
+    private fun getProducts(){
+        val stdList = sqliteHelper.getALLProducts()
+        adapter?.addItems(stdList)
     }
-    private fun dataInitList()
+
+    fun showDialog1()
     {
-        val itemImage = arrayOf(
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette,
-            R.drawable.baguette
-        )
+        val listItems = arrayOf("Wykorzystałem produkt", "Produkt jest popsuty")
+        var checkedItems: Int = 0
+        val builder = AlertDialog.Builder(requireContext())
 
-        val itemName = arrayOf(
-            "Produkt 1",
-            "Produkt 2",
-            "Produkt 3",
-            "Produkt 4",
-            "Produkt 5",
-            "Produkt 6",
-            "Produkt 7",
-            "Produkt 8",
-            "Produkt 9",
-            "Produkt 10"
-        )
+        builder.setTitle("Dlaczego usuwasz ten produkt?")
+        builder.setIcon(R.drawable.ic_baseline_no_food_24)
 
-        val itemExpImage = arrayOf(
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile,
-            R.drawable.smile
-        )
-
-        val itemQuantiy = arrayOf(
-            10,
-            1,
-            2,
-            5,
-            2,
-            7,
-            3,
-            1,
-            6,
-            9
-        )
-
-        val itemExpDay = arrayOf(
-            4,
-            6,
-            2,
-            9,
-            1,
-            5,
-            6,
-            3,
-            1,
-            6
-        )
-
-        for (i in itemImage.indices){
-            val product = PantryItem(itemImage[i],itemName[i],itemQuantiy[i],itemExpDay[i],itemExpImage[i])
-            pantryItemList.add(product)
+        builder.setSingleChoiceItems(listItems, 0){ dialogInterface, i ->
+            Log.i(TAG, "showDialog1: ${listItems[i]}")
+            checkedItems = i
         }
+
+        builder.setCancelable(false)
+        builder.setPositiveButton("Zatwierdź") { dialog, which ->
+            Log.i(TAG, "showDialog1 wybrano${listItems[checkedItems]}")
+            data.dialog1_opt = checkedItems
+            when(checkedItems){
+                0->showDialog2() //produkt wykorzystany
+                1->showDialog4() //produkt popsuty
+            }
+        }
+
+        builder.create()
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
+
+    fun showDialog2()
+    {
+        val listItems = arrayOf("bardzo dobry", "dobry", "zły", "nie zdatny do spożycia")
+        var checkedItems: Int = 0
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Jak oceniasz końcowy stan usuwanego produktu?")
+        builder.setIcon(R.drawable.ic_baseline_no_food_24)
+
+        builder.setSingleChoiceItems(listItems, 0){ dialogInterface, i ->
+            Log.i(TAG, "showDialog1: ${listItems[i]}")
+            checkedItems = i
+        }
+
+        builder.setCancelable(false)
+        builder.setPositiveButton("Zatwierdź") { dialog, which ->
+            Log.i(TAG, "showDialog2 wybrano${listItems[checkedItems]}")
+            data.dialog2_opt = checkedItems
+            when(checkedItems){
+                0, 1, 2->showDialog3()
+                3->showDialog4()
+            }
+            showDialog3()
+        }
+
+        builder.create()
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    fun showDialog3()
+    {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Za ile dni według ciebie nie byłby zdatny do spożycia?")
+        builder.setIcon(R.drawable.ic_baseline_no_food_24)
+
+        val input = EditText(requireContext())
+        input.setHint("Dni")
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        builder.setView(input)
+
+        builder.setCancelable(false)
+        builder.setPositiveButton("Zatwierdź") { dialog, which ->
+            Log.i(TAG, "showDialog3 wybrano${input.text.toString()}")
+            dataAnalyseDialogsEnd = 1
+            data.dialog3_opt = input.text.toString().toInt()
+        }
+
+        builder.create()
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    fun showDialog4()
+    {
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle("Od ilu dni produkt nie jest zdatny do spożycia?")
+        builder.setIcon(R.drawable.ic_baseline_no_food_24)
+
+        val input = EditText(requireContext())
+        input.setHint("Dni")
+        input.inputType = InputType.TYPE_CLASS_NUMBER
+        builder.setView(input)
+
+        builder.setCancelable(false)
+        builder.setPositiveButton("Zatwierdź") { dialog, which ->
+            data.dialog4_opt = input.text.toString().toInt()
+            Log.i(TAG, "showDialog3 wybrano${input.text.toString()}")
+            dataAnalyseDialogsEnd = 1
+
+        }
+
+        builder.create()
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    fun send_data_to_analyse(){
+        //to use in api
+        data.name = "test"
+        data.product_tag = 1
+    }
+
+   private fun deleteProduct(id:Int)
+    {
+        //todo ocena stanu produktu, powód usunięcia produktu
+        val builder = AlertDialog.Builder(context)
+        builder.setMessage("Czy na pewno chcesz usunąć ten produkt?")
+        builder.setCancelable(true)
+        builder.setPositiveButton("Tak") { dialog, _ ->
+            showDialog1()
+            sqliteHelper.deleteProductById(id)
+            getProducts()
+            dialog.dismiss()
+        }
+        builder.setNegativeButton("Nie"){dialog, _ ->
+            dialog.dismiss()
+        }
+        val alert = builder.create()
+        alert.show()
+    }
+
+    private fun ChangeProductToOpen(std: PantryItem)
+    {
+        adapter?.something_change()
+        std.productOpen = "OPEN"
+        sqliteHelper.updateProduct(std)
+    }
+
 }
+
+
+
