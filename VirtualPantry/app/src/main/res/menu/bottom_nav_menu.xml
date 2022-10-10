@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/pantryMenu"
-        android:title="Spiżarnia"
+        android:title="@string/bnm_pantry"
         android:icon="@drawable/dataset_48px"
         />
     <item
         android:id="@+id/addMenu"
-        android:title="Dodaj artykuł"
+        android:title="@string/bnm_add"
         android:icon="@drawable/add_48px"
         />
     <item
         android:id="@+id/editMenu"
-        android:title="Edytuj"
-        android:icon="@drawable/settings_48px"
+        android:title="@string/bnm_future"
+        android:icon="@drawable/temp_preferences_custom_48px"
         />
 </menu>
