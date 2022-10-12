@@ -399,7 +399,6 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
                 bitmap.getWidth()
             );
         }
-
         var final_bitmap = Bitmap.createScaledBitmap(dstBmp, 500, 500, true) //for better resolution
         val matrix = Matrix()
         Log.i(TAG, "setPic: bitmap.getWidth() = ${final_bitmap.getWidth()} / bitmap.getHeight() = ${final_bitmap.getHeight()}")
