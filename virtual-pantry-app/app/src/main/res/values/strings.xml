@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Virtual Pantry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string-array name="product_unit">
+        <item>sztuk</item>
+        <item>kg</item>
+        <item>gram</item>
+        <item>litrów</item>
+        <item>mililitrów</item>
+    </string-array>
+</resources>
