@@ -5,142 +5,222 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.FragmentAdd"
-    android:layout_marginLeft="30dp"
-    android:layout_marginTop="20dp"
-
     >
 
-        <ImageView
-        android:id="@+id/take_photo"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/product1"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout2"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/take_photo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:srcCompat="@drawable/product1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/add_product_attach_photo_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_attach_file_24"
+            android:layout_margin="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/take_photo"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <EditText
             android:id="@+id/product_name"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
             android:text=""
-            android:hint="Nazwa produktu"
-            android:layout_marginLeft="30dp"
+            android:ems="10"
+            android:hint="@string/fa_et_product_name_hint"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toRightOf="@id/add_product_attach_photo_button"
-            app:layout_constraintTop_toTopOf="@id/take_photo"
-            />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:id="@+id/fa_fourthy_text"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="Dni ważności"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/take_photo"
-        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <EditText
-            android:id="@+id/add_product_end_date"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:ems="10"
-            android:inputType="number"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@+id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/fa_fourthy_text"
-             />
-
-        <TextView
-            android:id="@+id/fa_fifethy_text"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="Po otwarciu"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/add_product_end_date"
-            />
-
-        <EditText
-            android:id="@+id/add_product_open_end_date"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:ems="10"
-            android:inputType="number"
-            android:layout_marginLeft="15dp"
-            app:layout_constraintLeft_toRightOf="@+id/datePicker1"
-            app:layout_constraintTop_toBottomOf="@+id/fa_fifethy_text"
-            />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout3"
+        android:padding="10dp">
 
         <DatePicker
             android:id="@+id/datePicker1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="5dp"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/take_photo" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <EditText
-        android:id="@+id/add_product_quanity"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:inputType="numberDecimal|numberSigned"
-        app:layout_constraintLeft_toLeftOf="@+id/datePicker1"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/datePicker1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-    <Spinner
-        android:id="@+id/unit_spinner"
-        android:layout_width="204dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="10dp"
+            <TextView
+                android:id="@+id/fa_fourthy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_tv_expiration_days"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/add_product_end_date"/>
 
-        app:layout_constraintLeft_toRightOf="@+id/add_product_quanity"
-        app:layout_constraintTop_toTopOf="@+id/add_product_quanity" />
+            <EditText
+                android:id="@+id/add_product_end_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@id/fa_fourthy_text"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/fa_fifethy_text"/>
 
-    <CheckBox
-           android:id="@+id/add_product_is_open"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="10dp"
-           android:layout_marginBottom="13dp"
-           android:text="Produkt otwarty"
-           app:layout_constraintTop_toBottomOf="@+id/add_product_quanity"
-           app:layout_constraintLeft_toLeftOf="@+id/datePicker1"
-            />
-    <CheckBox
-        android:id="@+id/add_product_is_outside_fridge"
-        android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/fa_fifethy_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fa_tv_after_open"
+                app:layout_constraintTop_toBottomOf="@id/add_product_end_date"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/add_product_open_end_date"/>
+
+            <EditText
+                android:id="@+id/add_product_open_end_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@id/fa_fifethy_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:text="Produkt poza lodówką"
-        app:layout_constraintTop_toBottomOf="@+id/add_product_quanity"
-        app:layout_constraintLeft_toRightOf="@+id/add_product_is_open"
-        />
+        app:layout_constraintTop_toBottomOf="@id/layout2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/layout4"
+        android:padding="10dp">
 
-        <ImageButton
-            android:id="@+id/add_product_add_button"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/add_48px"
-            app:layout_constraintTop_toBottomOf="@+id/add_product_is_outside_fridge"
-            app:layout_constraintLeft_toLeftOf="@+id/add_product_is_open"
-      />
+        <TextView
+            android:id="@+id/add_product_quanity_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_tv_product_quantity"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/unit_spinner_text"
+            app:layout_constraintBottom_toTopOf="@id/add_product_quanity"/>
+
+        <EditText
+            android:id="@+id/add_product_quanity"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:inputType="numberDecimal|numberSigned"
+            app:layout_constraintTop_toBottomOf="@id/add_product_quanity_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/unit_spinner"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/unit_spinner_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_tv_unit"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/add_product_quanity_text"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/unit_spinner"/>
+
+        <Spinner
+            android:id="@+id/unit_spinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/unit_spinner_text"
+            app:layout_constraintLeft_toRightOf="@id/add_product_quanity"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/add_product_add_button"
+        android:padding="10dp">
+
+        <CheckBox
+            android:id="@+id/add_product_is_open"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_tv_is_open"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/add_product_is_outside_fridge"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <CheckBox
+            android:id="@+id/add_product_is_outside_fridge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/fa_tv_out_fridge"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/add_product_is_open"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
-        android:id="@+id/add_product_attach_photo_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/ic_baseline_attach_file_24"
-        app:layout_constraintTop_toTopOf="@+id/take_photo"
-        app:layout_constraintLeft_toRightOf="@+id/take_photo" />
+        android:id="@+id/add_product_add_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:src="@drawable/add_48px"
+        app:layout_constraintTop_toBottomOf="@+id/layout4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

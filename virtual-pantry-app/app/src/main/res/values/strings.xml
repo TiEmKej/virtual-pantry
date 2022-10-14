@@ -1,14 +1,23 @@
 <resources>
     <string name="app_name">Virtual Pantry</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="appTitle">Your pantry</string>
+    <string name="fa_et_product_name_hint">Product name</string>
+    <string name="fa_tv_expiration_days">Expiration days</string>
+    <string name="fa_tv_after_open">After open</string>
+    <string name="fa_tv_product_quantity">Product Quantity</string>
+    <string name="fa_tv_unit">Unit</string>
+    <string name="fa_tv_is_open">Product opened</string>
+    <string name="fa_tv_out_fridge">Product outside the fridge</string>
+    <string name="bnm_pantry">Pantry</string>
+    <string name="bnm_add">Add Product</string>
+    <string name="bnm_future">Future</string>
+    <string name="fe_tv_future">Future of the App</string>
 
     <string-array name="product_unit">
-        <item>sztuk</item>
+        <item>pieces</item>
         <item>kg</item>
         <item>gram</item>
-        <item>litrów</item>
-        <item>mililitrów</item>
+        <item>liter</item>
+        <item>milliliter</item>
     </string-array>
 </resources>

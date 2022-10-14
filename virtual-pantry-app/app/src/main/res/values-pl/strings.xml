@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fa_et_product_name_hint">Nazwa produktu</string>
+    <string name="appTitle">Twoja spiżarnia</string>
+    <string name="app_name">Wirtualna Spiżarnia</string>
+    <string name="fa_tv_expiration_days">Dni ważności</string>
+    <string name="fa_tv_after_open">Po otwarciu</string>
+    <string name="fa_tv_product_quantity">Ilość produktu</string>
+    <string name="fa_tv_unit">Jednostka</string>
+    <string name="fa_tv_is_open">Produkt otwarty</string>
+    <string name="fa_tv_out_fridge">Produkt poza lodówką</string>
+    <string name="bnm_pantry">Spiżarnia</string>
+    <string name="bnm_add">Dodaj produkt</string>
+    <string name="bnm_future">Przyszłość</string>
+    <string name="fe_tv_future">Przyszłość aplikacji</string>
+
+    <string-array name="product_unit">
+        <item>sztuk</item>
+        <item>kg</item>
+        <item>gram</item>
+        <item>litrów</item>
+        <item>mililitrów</item>
+    </string-array>
+</resources>
