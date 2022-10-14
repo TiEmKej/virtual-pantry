@@ -17,6 +17,7 @@ import com.example.virtualpantry.database.SQLiteHelper
 import com.example.virtualpantry.dataclass.NotifityData
 import com.example.virtualpantry.dataclass.PantryItem
 import kotlinx.android.synthetic.main.fragment_add.*
+import java.lang.Math.abs
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -271,7 +272,7 @@ class PantryAdapter() : RecyclerView.Adapter<PantryAdapter.ViewHolder>() {
             var final_text: String
 
             if (ddays < 0) {
-                final_text = ddays.toString() + " "
+                final_text = abs(ddays).toString() + " "
                 if(ddays == -1L) final_text += "dzień po"
                 else final_text += "dni po"
             }

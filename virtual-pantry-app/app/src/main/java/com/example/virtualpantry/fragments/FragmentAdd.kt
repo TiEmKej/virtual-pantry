@@ -2,8 +2,10 @@ package com.example.virtualpantry.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -20,7 +22,6 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-
 import androidx.fragment.app.Fragment
 import com.example.virtualpantry.BuildConfig
 import com.example.virtualpantry.R
@@ -36,6 +37,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -46,10 +48,14 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
     lateinit var isopen_checkbox: CheckBox
     lateinit var infridge_checkbox: CheckBox
     lateinit var image_view: ImageView
+    lateinit var attach_photo: ImageButton
 
     lateinit var spinner: Spinner
 
-    private val cameraRequestId  = 1222
+    private val cameraRequestId  = 1000
+    private val galeryRequestId = 1001
+    private var imageUri: Uri? = null
+
     var currentPhotoPath: String = ""
     var was_photo_taken: Int = 0
 
@@ -74,12 +80,13 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        
+
         var v =  inflater.inflate(R.layout.fragment_add, null)
 
         isopen_checkbox = v.findViewById<CheckBox>(R.id.add_product_is_open)
         infridge_checkbox = v.findViewById<CheckBox>(R.id.add_product_is_outside_fridge)
         image_view = v.findViewById<ImageView>(R.id.take_photo)
+        attach_photo = v.findViewById<ImageButton>(R.id.add_product_attach_photo_button)
 
         image_view?.setOnClickListener() {
             Toast.makeText(requireContext(), "img clicked", Toast.LENGTH_SHORT).show()
@@ -87,6 +94,10 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         }
         was_photo_taken = 0
 
+        attach_photo.setOnClickListener {
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, galeryRequestId)
+        }
         //apiImagSend = ApiAdapter(R.id.product_name, requireContext())
         return v
     }
@@ -98,8 +109,8 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
 
         super.onViewCreated(view, savedInstanceState)
         add_product_add_button.setOnClickListener {view->
-           addProduct()
-       }
+            addProduct()
+        }
 
         image_view.setImageResource(R.drawable.ic_baseline_camera_alt_24)
         ArrayAdapter.createFromResource(requireContext() ,R.array.product_unit, android.R.layout.simple_spinner_item).also { adapter ->
@@ -128,11 +139,34 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         }
     }
 
+    fun getMediaAbsolutePath(ctx: Context, uri: Uri?): String? {
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor: Cursor? = ctx.getContentResolver().query(uri!!, filePathColumn, null, null, null)
+        if (cursor == null || cursor.getCount() === 0) return null
+        cursor.moveToFirst()
+        val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+        val picturePath: String = cursor.getString(columnIndex)
+        cursor.close()
+        return picturePath
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == cameraRequestId && resultCode == Activity.RESULT_OK) {
-            setPic()
+            setPic(currentPhotoPath, true)
             was_photo_taken = 1
-            sendImgUsingPostReq(currentPhotoPath, "test_name", false)
+            sendImgUsingPostReq(currentPhotoPath, "camera_name", true)
+        }
+        else if(requestCode == galeryRequestId  && resultCode == Activity.RESULT_OK)
+        {
+            imageUri = data?.data
+            //Log.i(TAG, imageUri.toString())
+            val selected_img_path = getMediaAbsolutePath(requireContext(), imageUri)
+            Log.i(TAG, "${selected_img_path}")
+
+            if (selected_img_path != null) {
+                sendImgUsingPostReq(selected_img_path, "gallery_img", false)
+                setPic(selected_img_path, false)
+            }
         }
     }
 
@@ -140,7 +174,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
 
     /*****************************************************************************************/
 
-    fun sendImgUsingPostReq(imgPath: String, name: String, is_test: Boolean)
+    fun sendImgUsingPostReq(imgPath: String, name: String, rotate_img: Boolean)
     {
         val bmOptions = BitmapFactory.Options().apply {
             inJustDecodeBounds = true
@@ -149,6 +183,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             inPurgeable = true
         }
 
+        Log.i(TAG, "sendImgUsingPostReq: ${imgPath}")
         var bitmap: Bitmap = BitmapFactory.decodeFile(imgPath, bmOptions)
         Log.i(TAG, "width = ${bitmap.width} / height = ${bitmap.height}")
 
@@ -158,7 +193,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         bitmap = final_bitmap
         Log.i(TAG, "width = ${bitmap.width} / height = ${bitmap.height}")
 
-        if(!is_test) {
+        if(rotate_img) {
             val matrix = Matrix()
             matrix.postRotate(90F)
             var final_rotatedBitmap: Bitmap = Bitmap.createBitmap(
@@ -183,7 +218,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             object : Callback<ResponseModel> {
                 override fun onResponse(call: Call<ResponseModel>, response: Response<ResponseModel>) {
                     Log.i("FragmentEdit", "Success response : ${response.message()} / ${response.body()}")
-                    if(is_test == false) product_name.setText(response.body()?.message )
+                    product_name.setText(response.body()?.message )
                     Log.i("FragmentEdit", "Success response value passed")
                 }
                 override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
@@ -252,7 +287,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         }else{
             Toast.makeText(requireContext(), "Coś poszło nie tak :/", Toast.LENGTH_SHORT).show()
         }
-     }
+    }
 
     private fun clearEditText(){
         product_name.setText("")
@@ -277,6 +312,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             ".jpg", /* suffix */
             storageDir /* directory */
         ).apply {
+
             currentPhotoPath = absolutePath
         }
     }
@@ -304,7 +340,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         }
     }
 
-    private fun setPic() {
+    private fun setPic(path: String, rotate_img: Boolean) {
         Log.i(TAG, "setPic: Enter")
 
         val bmOptions = BitmapFactory.Options().apply {
@@ -315,9 +351,9 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             inSampleSize = 1
             inPurgeable = true
         }
-        Log.i(TAG, "setPic: ${currentPhotoPath}")
+        Log.i(TAG, "setPic: ${path}")
 
-        var bitmap: Bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions)
+        var bitmap: Bitmap = BitmapFactory.decodeFile(path, bmOptions)
         Log.i(TAG, "width = ${bitmap.width} / height = ${bitmap.height}")
 
         lateinit var dstBmp: Bitmap
@@ -339,12 +375,17 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
                 bitmap.getWidth()
             );
         }
-
         var final_bitmap = Bitmap.createScaledBitmap(dstBmp, 500, 500, true) //for better resolution
-        val matrix = Matrix()
-        Log.i(TAG, "setPic: bitmap.getWidth() = ${final_bitmap.getWidth()} / bitmap.getHeight() = ${final_bitmap.getHeight()}")
-        matrix.postRotate(90F)
-        var final_rotatedBitmap: Bitmap = Bitmap.createBitmap(final_bitmap, 0, 0, final_bitmap.getWidth(), final_bitmap.getHeight(), matrix, true)
-        take_photo.setImageBitmap(final_rotatedBitmap)
+
+        if(rotate_img) {
+            val matrix = Matrix()
+            Log.i(TAG, "setPic: bitmap.getWidth() = ${final_bitmap.getWidth()} / bitmap.getHeight() = ${final_bitmap.getHeight()}")
+            matrix.postRotate(90F)
+            var final_rotatedBitmap: Bitmap = Bitmap.createBitmap(final_bitmap, 0, 0, final_bitmap.getWidth(), final_bitmap.getHeight(), matrix, true)
+            final_bitmap = final_rotatedBitmap
+        }
+
+
+        take_photo.setImageBitmap(final_bitmap)
     }
 }

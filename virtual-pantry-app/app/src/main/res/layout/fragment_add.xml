@@ -24,8 +24,8 @@
             android:layout_height="50dp"
             android:text=""
             android:hint="Nazwa produktu"
-            android:layout_marginLeft="50dp"
-            app:layout_constraintLeft_toRightOf="@id/take_photo"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toRightOf="@id/add_product_attach_photo_button"
             app:layout_constraintTop_toTopOf="@id/take_photo"
             />
 
@@ -134,4 +134,13 @@
             app:layout_constraintTop_toBottomOf="@+id/add_product_is_outside_fridge"
             app:layout_constraintLeft_toLeftOf="@+id/add_product_is_open"
       />
+
+    <ImageButton
+        android:id="@+id/add_product_attach_photo_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_baseline_attach_file_24"
+        app:layout_constraintTop_toTopOf="@+id/take_photo"
+        app:layout_constraintLeft_toRightOf="@+id/take_photo" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
