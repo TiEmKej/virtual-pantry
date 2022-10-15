@@ -160,6 +160,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         {
             imageUri = data?.data
             //Log.i(TAG, imageUri.toString())
+
             val selected_img_path = getMediaAbsolutePath(requireContext(), imageUri)
             Log.i(TAG, "${selected_img_path}")
 
@@ -292,8 +293,8 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
     private fun clearEditText(){
         product_name.setText("")
         add_product_quanity.setText("")
-        add_product_end_date.setText("")
-        add_product_open_end_date.setText("")
+        add_product_end_date.setText("0")
+        add_product_open_end_date.setText("0")
         add_product_is_open.isChecked=false
         add_product_is_outside_fridge.isChecked=false
         image_view.setImageResource(R.drawable.ic_baseline_camera_alt_24)
@@ -384,7 +385,6 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             var final_rotatedBitmap: Bitmap = Bitmap.createBitmap(final_bitmap, 0, 0, final_bitmap.getWidth(), final_bitmap.getHeight(), matrix, true)
             final_bitmap = final_rotatedBitmap
         }
-
 
         take_photo.setImageBitmap(final_bitmap)
     }
