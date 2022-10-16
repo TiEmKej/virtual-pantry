@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pantryMenu"
+        android:title="@string/bnm_pantry"
+        android:icon="@drawable/dataset_48px"
+        />
+    <item
+        android:id="@+id/addMenu"
+        android:title="@string/bnm_add"
+        android:icon="@drawable/add_48px"
+        />
+</menu>
