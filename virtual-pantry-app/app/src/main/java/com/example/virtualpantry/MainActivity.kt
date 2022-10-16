@@ -148,10 +148,6 @@ class MainActivity : AppCompatActivity(){
                     replaceCurrentFragment(fragmentAdd)
                     true
                 }
-                R.id.editMenu -> {
-                    replaceCurrentFragment(fragmentEdit)
-                    true
-                }
                 else -> {
                     false
                 }

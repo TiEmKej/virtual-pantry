@@ -10,9 +10,4 @@
         android:title="@string/bnm_add"
         android:icon="@drawable/add_48px"
         />
-    <item
-        android:id="@+id/editMenu"
-        android:title="@string/bnm_future"
-        android:icon="@drawable/temp_preferences_custom_48px"
-        />
 </menu>
