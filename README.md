@@ -83,6 +83,6 @@ Szkolenie aplikacji okazało sie bardzo trudne. Ilość produktów, ich stany do
 - pliki motywów
 
 ## Autorzy projektu
-1. Miłosz Piekarski
-2. Kacper Jaśniewicz
-3. Jakub Grzelak
+1. Miłosz Piekarski 4TI (po gimnazjum)
+2. Kacper Jaśniewicz 4TI (po gimnazjum)
+3. Jakub Grzelak 4TI (po podstawówce)
