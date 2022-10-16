@@ -23,7 +23,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import com.example.virtualpantry.BuildConfig
+//import com.example.virtualpantry.BuildConfig
+import com.example.virtualpantry.BuildConfig.APPLICATION_ID
 import com.example.virtualpantry.R
 import com.example.virtualpantry.database.ApiService
 import com.example.virtualpantry.database.DataApi
@@ -32,6 +33,7 @@ import com.example.virtualpantry.dataclass.PantryItem
 import com.example.virtualpantry.dataclass.RequestModel
 import com.example.virtualpantry.dataclass.ResponseModel
 import kotlinx.android.synthetic.main.fragment_add.*
+//import net.danlew.android.joda.BuildConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -160,13 +162,15 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
         {
             imageUri = data?.data
             //Log.i(TAG, imageUri.toString())
-
+            was_photo_taken = 1
             val selected_img_path = getMediaAbsolutePath(requireContext(), imageUri)
             Log.i(TAG, "${selected_img_path}")
 
             if (selected_img_path != null) {
                 sendImgUsingPostReq(selected_img_path, "gallery_img", false)
-                setPic(selected_img_path, false)
+                currentPhotoPath = selected_img_path
+                setPic(selected_img_path, true
+                )
             }
         }
     }
@@ -331,7 +335,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         requireContext(),
-                        BuildConfig.APPLICATION_ID + ".provider",
+                        APPLICATION_ID + ".provider",
                         it
                     )
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
