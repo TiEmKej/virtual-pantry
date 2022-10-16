@@ -23,6 +23,15 @@ Aktualnie nasza aplikacja pozwala na:
 - Serwer obsługujacy wysyłanie zdjeć w celu przetwarząnia AI napisany w pythonie
 - AI stworzone z użyciem Tensorflow w Pythonie.
 
+## Potrzebne pakiety dla serwera
+- pip install tensorflow
+- pip install keras
+- pip install numpy
+- pip install flask
+- pip install base64
+- pip install pillow
+- pip install waitress
+
 ## Działanie naszej aplikacji
 Działanie naszej aplikacji jest dokładnie opisane tutaj.
 ### Dodawanie produktów
@@ -40,7 +49,7 @@ Cała aplikacja miała się opierać o prosty schemat:
 4. Uzupełniamy date ważności
 5. Gotowe
 
-Szkolenie aplikacji okazało sie bardzo trudne. Ilość produktów, ich stany dojrzałości w przypadku owoców i warzyw, tło, na którym zdjęcia byłyby wykonywane. Wszystkie te czynniki razem wzięte dały nam obraz dopiero podczas testów ile tak naprawde potrzeba danych i większe zasobu czasu w celu wyszkoleniea AI by bezproblemowo działało w warunkach "polowych". Nasze AI rozpoznaje produkty na których zostało przetrenowane, czyli zdjęcia głównie pobrane z internetu. W momencie zdjeć zrobionych przez nas sanych pojawiają się problemy z rozpoznawaniem obiektu. Całość projektu pomijając ten fakt jest w pełni funkcjonalna, a samo AI dla pełnego działa potrzebuje jedynie więcej danych oraz czasu na jego szkolenie by przemóc te różnorodność w postaci różnego koloru tła, oświetlenia itp.
+Szkolenie aplikacji okazało sie bardzo trudne. Ilość produktów, ich stany dojrzałości w przypadku owoców i warzyw, tło, na którym zdjęcia byłyby wykonywane. Wszystkie te czynniki razem wzięte dały nam obraz dopiero podczas testów ile tak naprawde potrzeba danych i większe zasobu czasu w celu wyszkoleniea AI by bezproblemowo działało w warunkach "polowych". Nasze AI rozpoznaje produkty na których zostało przetrenowane, czyli zdjęcia głównie pobrane z internetu. Spełniło to założenia dla naszego prototypu aplikacji. W dalszym rozwoju naszego AI należy wykonać więcej zdjęc recznie oraz wprowadzic je do materiału ćwiczeniowego by nasza aplikacja miała jak najbardziej realne próbki badawcze.
 
 ## Rozpiska plików
 1. Folder "virtual-pantry-app"
