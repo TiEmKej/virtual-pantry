@@ -45,7 +45,7 @@
 
         <TextView
             android:id="@+id/tvPFIPantryItemQuantity"
-            android:layout_width="80dp"
+            android:layout_width="160dp"
             android:layout_height="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
@@ -83,25 +83,6 @@
             app:layout_constraintRight_toLeftOf="@id/tvPFIPantryItemDayText"
             app:layout_constraintBottom_toBottomOf="@id/is_product_open"
             app:srcCompat="@drawable/ic_baseline_delete_24"
-            />
-
-        <ImageButton
-            android:id="@+id/quantity_down"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-
-            app:srcCompat="@drawable/ic_baseline_arrow_drop_down_10"
-            app:layout_constraintLeft_toRightOf="@id/tvPFIPantryItemQuantity"
-            app:layout_constraintBottom_toBottomOf="@id/tvPFIPantryItemQuantity"
-            />
-
-        <ImageButton
-            android:id="@+id/quantity_up"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            app:srcCompat="@drawable/ic_baseline_arrow_drop_up_24"
-            app:layout_constraintLeft_toRightOf="@id/quantity_down"
-            app:layout_constraintBottom_toBottomOf="@id/tvPFIPantryItemQuantity"
             />
 
         <CheckBox

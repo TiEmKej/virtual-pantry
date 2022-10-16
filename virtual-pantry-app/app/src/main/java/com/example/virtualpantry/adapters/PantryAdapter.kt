@@ -174,8 +174,6 @@ class PantryAdapter() : RecyclerView.Adapter<PantryAdapter.ViewHolder>() {
         var quantity: TextView
         var days: TextView
 
-        var quantity_btn_up: ImageButton
-        var quantity_btn_down: ImageButton
         var remove_btn: ImageButton
 
         var open: CheckBox
@@ -202,8 +200,6 @@ class PantryAdapter() : RecyclerView.Adapter<PantryAdapter.ViewHolder>() {
             quantity = view.findViewById(R.id.tvPFIPantryItemQuantity)
             days = view.findViewById(R.id.tvPFIPantryItemDayText)
 
-            quantity_btn_up = view.findViewById(R.id.quantity_up)
-            quantity_btn_down = view.findViewById(R.id.quantity_down)
             remove_btn = view.findViewById(R.id.RemoveButton)
 
             open = view.findViewById(R.id.is_product_open)
