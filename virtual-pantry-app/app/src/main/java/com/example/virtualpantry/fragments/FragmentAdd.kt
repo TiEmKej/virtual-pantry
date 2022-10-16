@@ -213,7 +213,7 @@ class FragmentAdd : Fragment(R.layout.fragment_add) {
             bitmap = final_rotatedBitmap
         }
 
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
         val imageBytes: ByteArray = byteArrayOutputStream.toByteArray()
         val imageString: String = Base64.encodeToString(imageBytes, Base64.URL_SAFE)
 
